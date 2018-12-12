@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+
+</head>
+<body>
+ <div class="container-fluid">
+     <div class="row">
+         <div class="col-md-12">
+             <h2>FileUpload</h2>
+
+             <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successmessage}">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+              </button>
+              <strong th:text="${successmessage}"></strong>
+             </div>
+
+             <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+              </button>
+              <strong th:text="${errormessage}"></strong>
+             </div>
+
+
+             <form action="/" th:action="@{'/fileUpload'}" th:object="${user}" method="post" enctype="multipart/form-data">
+               <div class="form-group">
+                 <label for="fileUpload">File Upload(Excel/CSV/JSON)</label>
+                 <input type="file" class="form-control" id="file" name="file" th:field="*{file}" multiple>
+               </div>
+              
+                 <button type="submit" class="btn btn-primary">Submit</button>
+
+                
+        </form>
+
+
+         </div>
+         <div class="col-md-12">
+             <h2>All Users
+             <a th:href="@{'/createExcel'}" style="float: right;"><img th:src="@{/images/excel.png}" style="width:40px;"></a>
+             </h2>
+             <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>File Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="user :${users}">
+        <td th:text="${user.firstName}">John</td>
+        <td th:text="${user.lastName}">Last</td>
+        <td th:text="${user.email}">John@gmail.com</td>
+        <td th:text="${user.phoneNumber}">9726</td>
+        <td th:text="${user.fileType}">cs</td>
+      </tr>      
+    </tbody>
+  </table> 
+</div>
+
+     </div>
+
+ <div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>
